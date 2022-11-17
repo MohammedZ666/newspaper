@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="center">
+      <h1>Publish an article</h1>
+      <hr />
+      <form>
+        <h2>Editor authentication</h2>
+        <hr />
+        <p>Please put editor authenciatication details to add an article</p>
+
+        <label for="email"> Email</label> <br />
+        <input name="email" type="email" required /> <br />
+
+        <label for="password"> Password</label> <br />
+        <input name="password" type="password" required /> <br />
+        <br />
+
+        <h2>Add article</h2>
+        <hr />
+        <label for="title">Title</label> <br />
+        <input name="title" required /> <br />
+
+        <label for="author">Author</label> <br />
+        <input name="author" required /> <br />
+
+        <label for="content">Content</label><br />
+        <textarea name="content" required></textarea><br />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script async defer>
+      document.addEventListener("DOMContentLoaded", function () {
+        const element = document.querySelector("form");
+        element.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const email = document.getElementsByName("email")[0].value;
+          const password = document.getElementsByName("password")[0].value;
+          const title = document.getElementsByName("title")[0].value;
+          const author = document.getElementsByName("author")[0].value;
+          const content = document.getElementsByName("content")[0].value;
+          fetch("/article/publish", {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+              email,
+              password,
+              title,
+              author,
+              content,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              alert(`${data.msg}`);
+              location.reload();
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="center">
+      <h1>Read articles</h1>
+      <hr />
+      <div id="articles"></div>
+    </div>
+    <script async defer>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const response = await fetch("article/get-list/", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        if (response.status === 200) {
+          const json = await response.json();
+          const articles = json.articles;
+          if (articles.length === 0) {
+            const element = document.createElement("p");
+            element.innerText = "No articles found :(";
+            document.getElementById("articles").append(element);
+          } else {
+            for (let i = 0; i < articles.length; i++) {
+              const anchor = document.createElement("a");
+              anchor.href = `/read.html?id=${articles[i]._id}`;
+              anchor.innerText = articles[i].title;
+              const element = document.createElement("p");
+              element.append(anchor);
+              document.getElementById("articles").append(element);
+            }
+          }
+        } else alert(`An error was encountered: ${json.msg}`);
+      });
+    </script>
+  </body>
+</html>

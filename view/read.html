@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="center">
+      <h1 id="title"></h1>
+      <hr />
+      <h2 id="author"></h2>
+      <p id="content"></p>
+    </div>
+    <script async defer>
+      document.addEventListener("DOMContentLoaded", async () => {
+        function getSearchParameters() {
+          var prmstr = window.location.search.substr(1);
+          return prmstr != null && prmstr != ""
+            ? transformToAssocArray(prmstr)
+            : {};
+        }
+
+        function transformToAssocArray(prmstr) {
+          var params = {};
+          var prmarr = prmstr.split("&");
+          for (var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+          }
+          return params;
+        }
+
+        let params = getSearchParameters();
+        if (params && params["id"]) {
+          const response = await fetch(`article/get/${params.id}`, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "GET",
+          });
+          if (response.status === 200) {
+            const json = await response.json();
+            const article = json.article;
+            if (article) {
+              document.getElementById("title").innerText = article.title;
+              document.getElementById("author").innerText = article.author;
+              document.getElementById("content").innerText = article.content;
+            } else {
+              document.getElementById("title").innerText =
+                "Sorry. Article not found :(";
+            }
+          } else alert(`An error was encountered: ${json.msg}`);
+        } else {
+          document.getElementById("title").innerText = "Bad request";
+        }
+      });
+    </script>
+  </body>
+</html>

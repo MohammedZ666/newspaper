@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="center">
+      <h1>Add editor</h1>
+      <hr />
+      <form>
+        <h2>Admin authentication</h2>
+        <hr />
+        <p>Please put admin authenciatication details to add an article</p>
+
+        <label for="admin-email"> Email</label> <br />
+        <input name="admin-email" type="email" required /> <br />
+
+        <label for="admin-password"> Password</label> <br />
+        <input name="admin-password" type="password" required /> <br />
+        <br />
+
+        <h2>Editor details</h2>
+        <hr />
+        <label for="email"> Email</label><br /><br />
+        <input name="email" type="email" required /> <br /><br />
+        <label for="password">Password</label><br />
+        <input name="password" type="password" required /> <br /><br />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script async defer>
+      document.addEventListener("DOMContentLoaded", function () {
+        const element = document.querySelector("form");
+        element.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const adminEmail = document.getElementsByName("admin-email")[0].value;
+          const adminPassword =
+            document.getElementsByName("admin-password")[0].value;
+          const email = document.getElementsByName("email")[0].value;
+          const password = document.getElementsByName("password")[0].value;
+
+          fetch("/editor/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              adminEmail,
+              adminPassword,
+              email,
+              password,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              alert(`${data.msg}`);
+              location.reload();
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
