@@ -1,0 +1,1 @@
+curl http://localhost:3000/article/get/63768cd59739639a1c074db4

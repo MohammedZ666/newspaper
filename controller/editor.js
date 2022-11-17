@@ -26,9 +26,11 @@ const create = async (req, res) => {
             password
         }, {
             upsert: true,
-        });
+            new: true
+        }).select('-password');
         return res.status(200).json({
-            msg: "Success!"
+            msg: "Success!",
+            editor
         });
     } catch (err) {
         console.log(err)

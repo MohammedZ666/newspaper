@@ -40,7 +40,7 @@ const publish = async (req, res) => {
 
 const get_list = async (req, res) => {
     try {
-        const articles = await Article.find({});
+        const articles = await Article.find({}).select('-content -author');
         return res.status(200).json({
             articles
         })
@@ -59,7 +59,7 @@ const get = async (req, res) => {
         return res.status(200).json({
             article
         })
-    } catch (error) {
+    } catch (err) {
         res.status(400).json({
             msg: `No article found ${err}`
         })
