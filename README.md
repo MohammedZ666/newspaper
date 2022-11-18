@@ -21,7 +21,7 @@
 To run the app:
 
 1. Go to project root
-2. Setup the .env file as per .env.example.
+2. Setup the `.env` file as per `.env.example`.
 3. run `npm install` in terminal
 4. run `npm start` in terminal
 
