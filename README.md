@@ -4,7 +4,7 @@
 
 1. **Problem statement and application scope**: Here, we need to design the backend for a news paper that can only have one editor at a time. When a new editor is added to the system, the previous one is let go. The sole respnsibilty of the editor is to publish 10-15 articles a day. There is one Administrator to the system, who can appoint or let go of the previous editor. We have to develop the necessary REST API to run all the above mentioned CRUD operations with Node.js(Express).
 
-2. **Schema Diagram**: The diagram below contains data models or schema of the problem described and the CRUD operations implemented.<br/> <br/>
+2. **Schema Diagram**: The diagram below contains data models or schema of the problem described and the CRUD operations implemented:<br/> <br/>
    ![Schema Diagram](/schema.jpg)
 
 3. **Codebase**: This github repo contains the code for running the app.
