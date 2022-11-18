@@ -29,4 +29,4 @@ To run the app:
 
 1. In order to test the REST API endpoints, one can use the minimalistic web UI, by opening http://localhost:3000/ through browser
 
-2. Inside the /curl_test/ directory, to test every endpoint, one bash file was put per endpoint. Simply modify the endpoint bash file, and run via `bash <filename>.sh`. For example: `sh editor_create.sh` to create/update an editor.
+2. Inside the `curl_test/` directory, to test every endpoint, one bash file was put per endpoint. Simply modify the endpoint bash file, and run via `bash <filename>.sh`. For example: `sh editor_create.sh` to create/update an editor.
