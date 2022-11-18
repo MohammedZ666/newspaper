@@ -6,7 +6,7 @@
    In order to solve this problem, we need to: <br/>
 
    1. Design Admin, Editor and Article data-model/schema
-   2. Code API endpoints for updating the editor and publishing articles via NodeJS (Experss).
+   2. Code API endpoints for updating the editor and publishing articles via NodeJS (Experss). Here, we only need to upsert or update the editor, since the previous one is let go, once the new one comes in. Also, we need endpoints for publishing and reading articles.
    3. Here, the admin information is kept in the `.env` file instead of MongoDB, since there is only one admin and no super admin.
 
 2. **Schema Diagram**: The diagram below contains schema of the problem described and the CRUD operations implemented:<br/> <br/>
