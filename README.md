@@ -9,7 +9,7 @@
 
 3. **Codebase**: This github repo contains the code for running the app.
 
-## Solution description
+## Solution
 
 ### Run
 
